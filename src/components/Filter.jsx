@@ -1,13 +1,13 @@
 const Filter = ({ handleChange }) => {
 
     const handleOnChange = (event)=>{
-        event.preventDefault()
-        handleChange(event)
+        console.log(event.target.value);
+        handleChange(event.target.value)
     }
 
     return (<>
         find countries
-        <input id = "countryName" onChange = {(event)=> handleOnChange(event)} />
+        <input id = "countryName" onChange = {handleOnChange} />
     </>)
 }
 
