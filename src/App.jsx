@@ -5,50 +5,45 @@ import Notification from "./components/Notification";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
-  const [searchWord, setSearchWord] = useState("");
+  const [fCountries, setFCountries] = useState([]);
   const [notifyMessage, setNotifyMessage] = useState(null);
+  const [searchWord, setSearchWord] = useState(null);
 
   useEffect(() => {
     countryService.getCountries().then((res) => {
       setCountries(res);
     });
-
-    // return () => {
-    //   // cleanup;
-    // };
   }, []);
 
-  console.log("RENDER");
-
-  const filterCountries = () => {
-    // console.log(searchWord);
-
-    if (searchWord === "") {
-      return [];
+  useEffect(() => {
+    if (searchWord) {
+      setFCountries(filterCountries(searchWord));
+      console.log(fCountries);
+    } else {
+      console.log(searchWord);
+      setNotifyMessage("");
+      setFCountries([]);
     }
+  }, [searchWord]);
 
+  const filterCountries = (searchWord) => {
     const arr = countries.filter((x) =>
       x.name.common.toLowerCase().includes(searchWord.toLowerCase())
     );
-    // console.log(arr.length);
 
     if (arr.length > 10) {
       const newMessage = "Too many matches, specify another filter";
-      console.log("NEW", newMessage);
-      console.log("MSG", notifyMessage);
-      console.log("OBJECT IS", Object.is(newMessage, notifyMessage))
-      // if (newMessage !== notifyMessage) 
-        setNotifyMessage(newMessage);
+      setNotifyMessage(newMessage);
       return [];
+    } else {
+      setNotifyMessage("");
     }
     return arr;
   };
 
-  const fCountries = filterCountries();
-
   const handleOnChange = (name) => {
+    console.log(name);
     setSearchWord(name);
-    console.log("KEY", name);
   };
 
   return (
