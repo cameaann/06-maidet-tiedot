@@ -5,8 +5,6 @@ import Notification from "./components/Notification";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
-  const [fCountries, setFCountries] = useState([]);
-  const [notifyMessage, setNotifyMessage] = useState(null);
   const [searchWord, setSearchWord] = useState(null);
 
   useEffect(() => {
@@ -15,30 +13,22 @@ const App = () => {
     });
   }, []);
 
-  useEffect(() => {
+  const filterCountries = () => {
     if (searchWord) {
-      setFCountries(filterCountries(searchWord));
-      console.log(fCountries);
-    } else {
-      console.log(searchWord);
-      setNotifyMessage("");
-      setFCountries([]);
-    }
-  }, [searchWord]);
+      const arr = countries.filter((x) =>
+        x.name.common.toLowerCase().includes(searchWord.toLowerCase())
+      );
 
-  const filterCountries = (searchWord) => {
-    const arr = countries.filter((x) =>
-      x.name.common.toLowerCase().includes(searchWord.toLowerCase())
-    );
-
-    if (arr.length > 10) {
-      const newMessage = "Too many matches, specify another filter";
-      setNotifyMessage(newMessage);
-      return [];
-    } else {
-      setNotifyMessage("");
+      if (arr.length > 10) {
+        return {
+          filteredCountries: [],
+          message: "Too many matches, specify another filter",
+        };
+      } else {
+        return { filteredCountries: arr, message: "" };
+      }
     }
-    return arr;
+    return { filteredCountries: [], message: "" };
   };
 
   const handleOnChange = (name) => {
@@ -46,14 +36,16 @@ const App = () => {
     setSearchWord(name);
   };
 
+  const { filteredCountries, message } = filterCountries();
+
   return (
     <div>
       <h1>Countries</h1>
       <Filter handleChange={handleOnChange} />
-      {fCountries.map((x) => {
+      {filteredCountries.map((x) => {
         return <div key={x.name.common}>{x.name.common}</div>;
       })}
-      <Notification message={notifyMessage} />
+      <Notification message={message} />
     </div>
   );
 };
