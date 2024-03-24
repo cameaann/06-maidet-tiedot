@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import countryService from "./services/countryService";
 import Filter from "./components/Filter";
 import Notification from "./components/Notification";
-import Country from "./components/Country";
 
-const App = () => {
+export const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchWord, setSearchWord] = useState(null);
 
@@ -42,11 +41,16 @@ const App = () => {
   if (filteredCountries.length === 1) {
     const country = filteredCountries[0];
     console.log(filteredCountries);
+    console.log(country.name.common);
 
     return (
       <div>
         <Filter handleChange={handleOnChange} />
-        <Country country={country} />
+
+        <h1>{country.name.common}</h1>
+        <div>Capital {country.capital}</div>
+        <div>Area {country.area}</div>
+        {/* <div>{filteredCountries.languages.map(lang => { return <li key = {lang.id}>{lang}</li> })}</div> */}
       </div>
     );
   }
@@ -61,5 +65,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;
