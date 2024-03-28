@@ -10,7 +10,7 @@ const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchWord, setSearchWord] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [weatherInfo, setWeatherInfo] = useState([]);
+  const [weatherInfo, setWeatherInfo] = useState(null);
 
   useEffect(() => {
     countryService.getCountries().then((res) => {
@@ -61,7 +61,7 @@ const App = () => {
 
   let content;
 
-  if (selectedCountry) {
+  if (selectedCountry && weatherInfo) {
     content = (
       <CountryFullView country={selectedCountry} weatherInfo={weatherInfo} />
     );

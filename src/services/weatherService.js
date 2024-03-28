@@ -2,9 +2,6 @@ import axios from "axios";
 
 const getWeatherInfo = (country) => {
   if (country) {
-    console.log(country);
-    console.log(country.capital[0]);
-
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${
       country.capital[0]
     }&appid=${import.meta.env.VITE_APP_KEY}`;
