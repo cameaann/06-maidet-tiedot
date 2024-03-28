@@ -1,22 +1,26 @@
-import axios from "axios"
-// const url = "https://api.openweathermap.org/data/2.5/weather?q="
-// {city name},{state code},{country code}&appid={API key}"
+import axios from "axios";
 
-const url = "http://localhost:3001/weatherInfo"
+const getWeatherInfo = (country) => {
+  if (country) {
+    console.log(country);
+    console.log(country.capital[0]);
 
-const getWeatherInfo = (capital) => {
-    // console.log(capital)
-    const promise = axios.get(url)
-    return promise.then(response => 
-        {
-            const { weather, main, wind } = response.data[0]
-            const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
-            console.log(main)
-            console.log(wind);
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${
+      country.capital[0]
+    }&appid=${import.meta.env.VITE_APP_KEY}`;
 
-        
-            return {main, wind, weather, iconUrl}
-        }) 
-}
+    const promise = axios.get(url);
+    return promise.then((response) => {
+      const { weather, main, wind } = response.data;
+      const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+      console.log(response.data);
+      console.log(main);
+      console.log(wind);
 
-export default { getWeatherInfo }
+      return { main, wind, weather, iconUrl };
+    });
+  }
+
+};
+
+export default { getWeatherInfo };
