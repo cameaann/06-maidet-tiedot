@@ -2,44 +2,31 @@ import { useState, useEffect } from "react";
 import weatherService from "../services/weatherService";
 import Country from "./Country";
 import Weather from "./Weather";
-import Notification from "./Notification";
 
 const CountryFullView = ({ country }) => {
   const [weatherInfo, setWeatherInfo] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
-    if (country) {
+    // setTimeout(() => {
+      
       try {
         weatherService.getWeatherInfo(country).then((response) => {
-          setWeatherInfo(response);
-          setLoading(true)
+            setWeatherInfo(response);
+            setLoading(false)          
         });
       } catch (error) {
-        setErrorMessage(error);
-      } finally {
-        setLoading(false);
-      }
-    }
+        console.error()
+      } 
+    // }, 4000);
+
   }, [country]);
 
-  let message;
-
-  if (loading) {
-    message = "Loading information about weather";
-  } 
-  // else {
-  //   console.log(loading);
-  //   return content = (
-  //     <Weather weatherInfo={weatherInfo} capital={country.capital[0]} />
-  //   );
-  // }
 
   return (
     <div>
       <Country country={country} />
-      {loading && (<Notification message = {message}/>)}
+      {loading && (<span className="loader"></span>)}
       {weatherInfo && (<Weather weatherInfo={weatherInfo} capital={country.capital[0]} />)}
     </div>
   );
