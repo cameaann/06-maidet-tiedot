@@ -1,4 +1,5 @@
 const Weather = ({ weatherInfo, capital }) => {
+
   return (
     <div>
       <h3>Weather in {capital}</h3>
@@ -12,5 +13,6 @@ const Weather = ({ weatherInfo, capital }) => {
       </div>
     </div>
   );
+  
 };
 export default Weather;

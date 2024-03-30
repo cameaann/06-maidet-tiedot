@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import countryService from "./services/countryService";
 import Filter from "./components/Filter";
 import Notification from "./components/Notification";
-import weatherService from "./services/weatherService";
 import CountriesShortView from "./components/CountriesShortView";
 import CountryFullView from "./components/CountryFullView";
 
@@ -10,7 +9,7 @@ const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchWord, setSearchWord] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [weatherInfo, setWeatherInfo] = useState(null);
+  
 
   useEffect(() => {
     countryService.getCountries().then((res) => {
@@ -18,13 +17,6 @@ const App = () => {
     });
   }, []);
 
-  useEffect(() => {
-    if (selectedCountry) {
-      weatherService.getWeatherInfo(selectedCountry).then((response) => {
-        setWeatherInfo(response);
-      });
-    }
-  }, [selectedCountry]);
 
   const filterCountries = () => {
     if (searchWord) {
@@ -61,9 +53,9 @@ const App = () => {
 
   let content;
 
-  if (selectedCountry && weatherInfo) {
+  if (selectedCountry) {
     content = (
-      <CountryFullView country={selectedCountry} weatherInfo={weatherInfo} />
+      <CountryFullView country={selectedCountry} />
     );
   } else {
     content = (
