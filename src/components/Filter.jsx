@@ -4,10 +4,11 @@ const Filter = ({ handleChange }) => {
         handleChange(event.target.value)
     }
 
-    return (<>
-        find countries
+    return (
+    <div className = "filter">
+        <label>Find countries</label>
         <input onChange = {handleOnChange} />
-    </>)
+    </div>)
 }
 
 export default Filter;

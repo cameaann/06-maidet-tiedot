@@ -9,14 +9,12 @@ const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchWord, setSearchWord] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  
 
   useEffect(() => {
     countryService.getCountries().then((res) => {
       setCountries(res);
     });
   }, []);
-
 
   const filterCountries = () => {
     if (searchWord) {
@@ -54,9 +52,7 @@ const App = () => {
   let content;
 
   if (selectedCountry) {
-    content = (
-      <CountryFullView country={selectedCountry} />
-    );
+    content = <CountryFullView country={selectedCountry} />;
   } else {
     content = (
       <div>
@@ -71,8 +67,10 @@ const App = () => {
 
   return (
     <div>
-      <Filter handleChange={handleOnChange} />
-      {content}
+      <div className="wrap-container">
+        <Filter handleChange={handleOnChange} />
+        {content}
+      </div>
     </div>
   );
 };

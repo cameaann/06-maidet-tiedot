@@ -9,9 +9,9 @@ const CountryItem = ({country, onClick }) => {
   };
   
   return (
-    <div>
+    <div className="country-item">
       <span>{country.name.common}</span>
-      <button onClick={show}>show</button>
+      <button className="show-button" onClick={show}>show</button>
     </div>
   );
 };
