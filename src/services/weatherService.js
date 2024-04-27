@@ -5,7 +5,6 @@ const getWeatherInfo = async (country) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${
       country.capital[0]
     }&appid=${import.meta.env.VITE_APP_KEY}`;
-    console.log(url);
 
       const res = await axios.get(url);
         const { weather, main, wind } = res.data;
