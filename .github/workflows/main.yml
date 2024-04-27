@@ -17,7 +17,8 @@ permissions:
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
+  
 #Allow repo secrets
 env:
   VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
