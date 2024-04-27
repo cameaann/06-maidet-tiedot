@@ -6,9 +6,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .wrap-container {
-  width: 80rem;
+  width: 40rem;
   padding: 2rem;
   margin: 0 auto;
+}
+.country-container{
+  display: flex;
+  flex-direction: column;
 }
 h1{
     margin-block-start: 3rem;
@@ -73,6 +77,7 @@ figure {
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+  align-self: center;
 }
 
 @keyframes rotation {

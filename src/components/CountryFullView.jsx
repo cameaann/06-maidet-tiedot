@@ -21,7 +21,7 @@ const CountryFullView = ({ country }) => {
 
 
   return (
-    <div>
+    <div className="country-container">
       <Country country={country} />
       {loading && (<span className="loader"></span>)}
       {weatherInfo && (<Weather weatherInfo={weatherInfo} capital={country.capital[0]} />)}
