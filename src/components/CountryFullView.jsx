@@ -7,9 +7,7 @@ const CountryFullView = ({ country }) => {
   const [weatherInfo, setWeatherInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // setTimeout(() => {
-      
+  useEffect(() => {      
       try {
         weatherService.getWeatherInfo(country).then((response) => {
             setWeatherInfo(response);
@@ -18,7 +16,6 @@ const CountryFullView = ({ country }) => {
       } catch (error) {
         console.error()
       } 
-    // }, 4000);
 
   }, [country]);
 
